@@ -29,7 +29,7 @@ function Input(props: InputProps) {
       {prefix ? (
         <span
           className={cn(
-            "absolute top-1/2 left-2 -translate-y-1/2 z-50 w-5 h-5 text-secondary pointer-events-none transition-colors",
+            "absolute top-1/2 left-2 -translate-y-1/2 w-5 h-5 text-secondary pointer-events-none transition-colors",
             { "text-foreground": focus }
           )}
         >

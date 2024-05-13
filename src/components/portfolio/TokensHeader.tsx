@@ -1,0 +1,46 @@
+"use client";
+
+import React from "react";
+
+// store
+import { useAppStore } from "~/store/store";
+
+// components
+import Checkbox from "~/components/shared/Checkbox";
+import Input from "~/components/shared/Input";
+import Icon from "~/components/shared/Icon";
+
+export default function TokensHeader() {
+  const hideZeroBalances = useAppStore(
+    (store) => store.portfolio.hideZeroBalances
+  );
+  const search = useAppStore((store) => store.portfolio.search);
+  const toggleZeroBalances = useAppStore(
+    (store) => store.portfolio.toggleZeroBalances
+  );
+  const setSearch = useAppStore((store) => store.portfolio.setSearch);
+
+  return (
+    <div className="flex items-center w-full h-12 my-6 px-10 gap-10">
+      <p className="text-lg font-semibold">Tokens</p>
+
+      {/* hide zero balances */}
+      <Checkbox
+        id="zero-balances"
+        label="Hide zero balances"
+        className="ml-auto"
+        value={hideZeroBalances}
+        onValueChange={(val) => toggleZeroBalances(val)}
+      />
+
+      <Input
+        type="text"
+        className="w-[250px]"
+        placeholder="Token name"
+        prefix={<Icon icon="search" />}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+    </div>
+  );
+}

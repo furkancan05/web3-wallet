@@ -1,12 +1,17 @@
 "use client";
 
+import { deleteCookie, setCookie } from "cookies-next";
+
 import { http, createConfig, WagmiProvider } from "wagmi";
-import { mainnet, sepolia, avalanche, polygon, bsc } from "wagmi/chains";
+import { mainnet, avalanche, polygon, bsc } from "wagmi/chains";
 
 // connectkit
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ConnectKitConfig } from "./connectkit.config";
+
+// config
+import { ConnectKitConfig } from "~/config/connectkit.config";
+import { constants } from "~/config/global.config";
 
 export default function Web3Provider({
   children,
@@ -17,10 +22,11 @@ export default function Web3Provider({
 
   const wagmiConfig = createConfig(
     getDefaultConfig({
-      chains: [mainnet, sepolia, avalanche, polygon, bsc],
+      // @ts-ignore // kalkacak
+      autoConnect: true,
+      chains: [mainnet, avalanche, polygon, bsc],
       transports: {
         [mainnet.id]: http(),
-        [sepolia.id]: http(),
         [avalanche.id]: http(),
         [polygon.id]: http(),
         [bsc.id]: http(),
@@ -37,6 +43,14 @@ export default function Web3Provider({
         <ConnectKitProvider
           debugMode={ConnectKitConfig.debugMode}
           theme="midnight"
+          onConnect={(connection) => {
+            setCookie(constants.userAddress, connection.address);
+            window.location.reload();
+          }}
+          onDisconnect={() => {
+            deleteCookie(constants.userAddress);
+            window.location.reload();
+          }}
           // customTheme={ConnectKitConfig.customTheme}
         >
           {children}

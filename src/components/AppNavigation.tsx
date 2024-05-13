@@ -16,9 +16,9 @@ export default function AppNavigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed left-0 w-[200px] h-full bg-card">
+    <nav className="fixed left-0 w-[200px] h-full bg-card z-50">
       {/* logo */}
-      <div className="flex items-center justify-center text-3xl font-bold my-10">
+      <div className="flex items-center justify-center text-3xl font-bold my-20">
         LOGO
       </div>
 
@@ -31,7 +31,7 @@ export default function AppNavigation() {
             <Link key={nav.title} href={nav.path} className="">
               <li
                 className={cn(
-                  "w-full flex gap-3 items-center px-4 py-3 text-secondary hover:bg-border/20 transition-colors",
+                  "w-full flex gap-3 items-center px-6 py-3 text-secondary text-sm font-semibold hover:bg-border/20 transition-colors",
                   {
                     "text-foreground border-solid border-r-4 border-accent":
                       isActive,
@@ -41,7 +41,7 @@ export default function AppNavigation() {
                 <Icon
                   icon={nav.icon}
                   className={cn("w-5 h-5 text-secondary", {
-                    "text-foreground": isActive,
+                    "text-accent": isActive,
                   })}
                 />
                 <span>{nav.title}</span>

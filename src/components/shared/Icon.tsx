@@ -1,9 +1,13 @@
 import {
   ArrowDown,
+  Avalanche,
+  Binance,
+  Ethereum,
   Eye,
   EyeCrossed,
   Loading,
   NFT,
+  Polygon,
   Refresh,
   Search,
   Send,
@@ -14,6 +18,10 @@ import {
 import { cn } from "~/utils/cn";
 
 const icons: Record<string, React.ReactNode> = {
+  ethereum: <Ethereum />,
+  avalanche: <Avalanche />,
+  polygon: <Polygon />,
+  binance: <Binance />,
   "arrow-down": <ArrowDown />,
   eye: <Eye />,
   "eye-crossed": <EyeCrossed />,

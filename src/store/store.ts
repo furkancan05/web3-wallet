@@ -4,6 +4,7 @@ import { immer } from "zustand/middleware/immer";
 import { enableMapSet } from "immer";
 
 import { type Portfolio, portfoliSlice } from "~/store/portfolio";
+import { NFTs, nftsSlice } from "~/store/nfts";
 
 enableMapSet();
 
@@ -16,6 +17,7 @@ export type ImmerStateCreator<T> = StateCreator<
 
 interface AppStore {
   portfolio: Portfolio;
+  nfts: NFTs;
 }
 
 export const useAppStore = create<AppStore>()(
@@ -23,6 +25,8 @@ export const useAppStore = create<AppStore>()(
     immer((...args) => ({
       // @ts-ignore kalkacak
       portfolio: portfoliSlice(...args),
+      // @ts-ignore kalkacak
+      nfts: nftsSlice(...args),
     }))
   )
 );

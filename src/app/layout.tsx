@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 
 // components
@@ -8,8 +8,9 @@ import AppHeader from "~/components/AppHeader";
 
 // config
 import Web3Provider from "~/config/wagmi.config";
+import Head from "next/head";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Web3 Wallet | Your Personal Portfolio",

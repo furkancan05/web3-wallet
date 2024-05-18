@@ -1,24 +1,18 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 
-// components
-import Icon from "~/components/shared/Icon";
+import TokenListItem from "~/components/portfolio/TokenListItem";
 
 // store
 import { useAppStore } from "~/store/store";
 
-// utils
-import { cn } from "~/utils/cn";
-
 export default function TokenList() {
-  const hidePrices = useAppStore((store) => store.portfolio.hidePrices);
   const userTokens = useAppStore((store) => store.portfolio.userTokens);
 
-  const price = 12.05;
-
-  console.log(userTokens);
+  const filteredTokens = React.useMemo(() => {
+    return userTokens;
+  }, [userTokens]);
 
   return (
     <div className="w-full text-foreground px-10 pb-10">
@@ -39,65 +33,32 @@ export default function TokenList() {
       </div>
 
       {/* token list */}
-
-      {userTokens ? (
-        <div className="w-6 h-6 mt-10 mx-auto animate-spin">
-          <Icon icon="loading" />
-        </div>
+      {!filteredTokens ? (
+        <Skeleton />
+      ) : filteredTokens.length === 0 ? (
+        <p className="text-center text-secondary mt-10">No tokens here.</p>
       ) : (
         <div className="flex flex-col gap-2">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1].map(
-            (_, i) => {
-              return (
-                <Link
-                  href=""
-                  key={i}
-                  className={cn(
-                    "flex w-full bg-card p-4 rounded-md hover:bg-secondary/15 transition-colors animate-list-item delay-[10000ms]"
-                    // (() => {
-                    //   const delay = i * 300;
-                    //   return `delay-[${delay}ms]`;
-                    // })()
-                  )}
-                  style={{ animationDelay: `${i * 300}ms` }}
-                >
-                  {/* image and name */}
-                  <div className="min-w-[30%] flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-secondary" />
-
-                    <div>
-                      <span className="font-semibold block">BTC</span>
-                      <small className="text-sm text-secondary">Bitcoin</small>
-                    </div>
-                  </div>
-
-                  <div className="w-full text-end font-semibold">
-                    <span>10 %</span>
-                  </div>
-                  <div className="w-full flex flex-col text-end font-semibold">
-                    {/* <span>$12.05</span> */}
-                    <div className="flex justify-end">
-                      <span>$</span>
-                      <span>{price.toString().split(".")[0]}</span>
-                      <span>.</span>
-                      <span className="text-secondary">
-                        {price.toString().split(".")[1]}
-                      </span>
-                    </div>
-                    <small className="text-sm text-green-500">+4.2%</small>
-                  </div>
-                  <div className="w-full flex flex-col text-end font-semibold">
-                    <span>{hidePrices ? "******" : "0 BTC"}</span>
-                    <small className="text-sm text-secondary">
-                      {hidePrices ? "******" : "$0"}
-                    </small>
-                  </div>
-                </Link>
-              );
-            }
-          )}
+          {filteredTokens.map((token, i) => (
+            <TokenListItem key={i} token={token} />
+          ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function Skeleton() {
+  return (
+    <div className="flex flex-col gap-2">
+      {["", "", "", "", "", "", "", "", "", ""].map((_, i) => {
+        return (
+          <div
+            key={i}
+            className="w-full h-20 bg-card rounded-md animate-pulse"
+          ></div>
+        );
+      })}
     </div>
   );
 }

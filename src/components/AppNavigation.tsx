@@ -3,9 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// components
-import Icon from "~/components/shared/Icon";
-
 // config
 import { AppNavigations } from "~/config/appNavigation.config";
 
@@ -38,12 +35,7 @@ export default function AppNavigation() {
                   }
                 )}
               >
-                <Icon
-                  icon={nav.icon}
-                  className={cn("w-5 h-5 text-secondary", {
-                    "text-accent": isActive,
-                  })}
-                />
+                {nav.icon}
                 <span>{nav.title}</span>
               </li>
             </Link>

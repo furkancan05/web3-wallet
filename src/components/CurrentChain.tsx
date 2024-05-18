@@ -4,14 +4,18 @@ import React from "react";
 import { useChainId } from "wagmi";
 
 // components
-import Icon from "~/components/shared/Icon";
+import { ChainIcons } from "~/config/chains";
 
 // utils
-import { cn } from "~/utils/cn";
 import { getChainName } from "~/utils/getChainName";
 
 export default function CurrentChain() {
   const chainId = useChainId();
+
+  const [state, setState] = React.useState<{
+    currentChainName: string | undefined;
+    icon: React.ReactNode | undefined;
+  }>({ currentChainName: undefined, icon: undefined });
 
   const icons = {
     eth: "ethereum",
@@ -20,24 +24,41 @@ export default function CurrentChain() {
     bsc: "binance",
   };
 
-  const currentChainName = React.useMemo(
-    () => getChainName(chainId),
-    [chainId]
-  );
+  const colors = {
+    eth: "#aa99d7",
+    avalanche: "#e94948",
+    polygon: "#874ce6",
+    bsc: "#f0bb1f",
+  };
 
-  if (!chainId) return <></>;
+  React.useEffect(() => {
+    if (!chainId) return;
+
+    const chainName = getChainName(chainId);
+    const icon = ChainIcons[chainName as keyof typeof icons];
+
+    setState({
+      currentChainName: chainName,
+      icon: icon,
+    });
+  }, [chainId]);
+
+  if (!state.currentChainName || !state.icon) return <div></div>;
   return (
     <div
-      className={cn(
-        "flex gap-1 items-center rounded-md bg-card mr-10 py-2 px-3"
-      )}
+      className={`h-10 flex gap-2 items-center rounded-md bg-card mr-5 px-3 text-[${
+        colors[state.currentChainName as keyof typeof colors]
+      }]`}
     >
-      <Icon
-        icon={icons[currentChainName as keyof typeof icons]}
-        className="w-6 h-6 text-secondary"
-      />
-      <small className="text-sm font-semibold uppercase">
-        {currentChainName}
+      <div
+        className={`w-5 h-5 text-[${
+          colors[state.currentChainName as keyof typeof colors]
+        }]`}
+      >
+        {state.icon}
+      </div>
+      <small className="text-base font-semibold uppercase">
+        {state.currentChainName}
       </small>
     </div>
   );

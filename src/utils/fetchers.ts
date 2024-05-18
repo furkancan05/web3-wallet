@@ -15,7 +15,7 @@ export const getUserTokens = async ({
 }) => {
   return (await api.call({
     from: "moralis",
-    url: `${userAddress}/erc20`,
+    url: `wallets/${userAddress}/tokens`,
     method: "GET",
     queryParams: { chain: chainName },
   })) as UserTokenResponse;

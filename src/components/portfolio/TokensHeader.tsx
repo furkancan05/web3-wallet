@@ -8,7 +8,7 @@ import { useAppStore } from "~/store/store";
 // components
 import Checkbox from "~/components/shared/Checkbox";
 import Input from "~/components/shared/Input";
-import Icon from "~/components/shared/Icon";
+import { TbSearch } from "react-icons/tb";
 
 export default function TokensHeader() {
   const hideZeroBalances = useAppStore(
@@ -37,7 +37,7 @@ export default function TokensHeader() {
         type="text"
         className="w-[250px]"
         placeholder="Token name"
-        prefix={<Icon icon="search" />}
+        prefix={<TbSearch size={20} />}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

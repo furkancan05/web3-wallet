@@ -3,24 +3,24 @@ import { produce } from "immer";
 
 // types
 import type { ImmerStateCreator } from "~/store/store";
-import { UserTokenResponse } from "~/types/portfolio.types";
+import { UserTokens } from "~/types/portfolio.types";
 
 export interface Portfolio {
   hidePrices: boolean;
   hideZeroBalances: boolean;
   search: string;
 
-  userTokens: UserTokenResponse | undefined;
+  userTokens: UserTokens[] | undefined;
 
   togglePrices: (value: boolean) => void;
   toggleZeroBalances: (value: boolean) => void;
   setSearch: (value: string) => void;
 
-  setUserTokens: (tokens: UserTokenResponse) => void;
+  setUserTokens: (tokens: UserTokens[] | undefined) => void;
 }
 
 export const portfoliSlice: ImmerStateCreator<Portfolio> = (set) => ({
-  hidePrices: true,
+  hidePrices: false,
   hideZeroBalances: false,
   search: "",
 

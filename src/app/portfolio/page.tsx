@@ -29,11 +29,15 @@ export default function PortfolioPage() {
       chainName: getChainName(chainId),
     });
 
-    setUserTokens(tokens);
+    if (!tokens) return;
+
+    const userTokens = tokens.result.filter((token) => !token.possible_spam);
+
+    setUserTokens(userTokens);
   };
 
   React.useEffect(() => {
-    // loadUserTokens();
+    loadUserTokens();
   }, []);
 
   return (

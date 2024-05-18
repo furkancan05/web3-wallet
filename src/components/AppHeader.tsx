@@ -13,7 +13,6 @@ import { cn } from "~/utils/cn";
 
 export default function AppHeader() {
   const pathname = usePathname();
-  const chainId = useChainId();
 
   return (
     <header

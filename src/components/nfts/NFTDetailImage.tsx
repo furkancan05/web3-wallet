@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
+
+// store
 import { useAppStore } from "~/store/store";
 
 export default function NFTDetailImage() {
   const token = useAppStore((store) => store.nfts.nftDetail);
-
-  console.log(token);
 
   const image = token?.token.image;
 

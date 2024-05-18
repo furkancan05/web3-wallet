@@ -2,8 +2,7 @@
 
 import React from "react";
 
-// components
-import Icon from "~/components/shared/Icon";
+import { ChainIcons } from "~/config/chains";
 
 // store
 import { useAppStore } from "~/store/store";
@@ -49,7 +48,7 @@ function ChainFilter() {
               }
             )}
           >
-            <Icon icon={chain.name} className="w-5 h-5" />
+            {ChainIcons[chain.name as keyof typeof ChainIcons]}
           </div>
         );
       })}

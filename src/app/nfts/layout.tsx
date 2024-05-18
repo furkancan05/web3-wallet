@@ -26,7 +26,7 @@ type LayoutLoader =
     }
   | undefined;
 
-export async function getUserNFTs(): Promise<LayoutLoader> {
+async function getUserNFTs(): Promise<LayoutLoader> {
   const nextCookies = cookies();
   const userAddress = nextCookies.get(constants.userAddress)?.value;
 

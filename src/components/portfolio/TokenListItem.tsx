@@ -10,14 +10,19 @@ import { useAppStore } from "~/store/store";
 
 // types
 import { UserTokens } from "~/types/portfolio.types";
+
+// utils
 import { cn } from "~/utils/cn";
 
 function TokenListItem({ token }: { token: UserTokens }) {
   const hidePrices = useAppStore((store) => store.portfolio.hidePrices);
   const userTokens = useAppStore((store) => store.portfolio.userTokens);
 
-  const tokenAmountPercentage = React.useMemo(() => {
-    if (!userTokens || userTokens.length === 0) return 0;
+  const [tokenAmountPercentage, seTokenAmountPercentage] = React.useState(0);
+
+  const getTokenAmountPercentage = () => {
+    if (!userTokens || userTokens.length === 0)
+      return seTokenAmountPercentage(0);
 
     let totalUsd = 0;
 
@@ -27,10 +32,14 @@ function TokenListItem({ token }: { token: UserTokens }) {
 
     const percentage = (token.usd_value / totalUsd) * 100;
 
-    if (isNaN(percentage)) return 0;
+    if (isNaN(percentage)) return seTokenAmountPercentage(0);
 
-    return percentage;
-  }, [userTokens]);
+    seTokenAmountPercentage(percentage);
+  };
+
+  React.useEffect(() => {
+    getTokenAmountPercentage();
+  }, []);
 
   // token usd 24h change is positive or negative
   const percentageChange = token.usd_price_24hr_usd_change > 0;
@@ -38,7 +47,7 @@ function TokenListItem({ token }: { token: UserTokens }) {
   return (
     <Link
       href=""
-      className="flex w-full bg-card p-4 rounded-md hover:bg-secondary/15 transition-colors animate-list-item delay-[10000ms]"
+      className="flex w-full bg-card p-4 rounded-md hover:bg-card/90 transition-colors animate-list-item"
     >
       {/* image and name */}
       <div className="min-w-[30%] flex gap-4">
@@ -49,7 +58,6 @@ function TokenListItem({ token }: { token: UserTokens }) {
           alt=""
           className="w-10 h-10 rounded-full"
         />
-        {/* <div className="w-10 h-10 rounded-full bg-secondary" /> */}
 
         <div>
           <span className="font-semibold block">{token.symbol}</span>

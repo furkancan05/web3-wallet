@@ -3,10 +3,13 @@
 import React from "react";
 
 // components
+import Image from "next/image";
 import Link from "next/link";
 
 // types
 import { NFTs } from "~/types/nfts.types";
+
+// utils
 import { getChainName } from "~/utils/getChainName";
 
 export default function NFTCard({ nft }: { nft: NFTs | undefined }) {

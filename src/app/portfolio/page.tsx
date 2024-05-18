@@ -24,6 +24,8 @@ export default function PortfolioPage() {
   const loadUserTokens = async () => {
     if (!address) return;
 
+    setUserTokens(undefined);
+
     const tokens = await getUserTokens({
       userAddress: address,
       chainName: getChainName(chainId),
@@ -38,7 +40,7 @@ export default function PortfolioPage() {
 
   React.useEffect(() => {
     loadUserTokens();
-  }, []);
+  }, [chainId]);
 
   return (
     <div className="w-full h-full">

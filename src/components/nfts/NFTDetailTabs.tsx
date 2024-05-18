@@ -1,7 +1,12 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+
+// store
 import { useAppStore } from "~/store/store";
+
+// utils
 import { cn } from "~/utils/cn";
 
 export default function NFTDetailTabs() {
@@ -20,7 +25,7 @@ export default function NFTDetailTabs() {
         <div className="flex items-end gap-2">
           <div className="w-8 h-8 rounded-full bg-secondary overflow-hidden">
             {token?.collection.image ? (
-              <img
+              <Image
                 alt=""
                 src={
                   token.collection.image.startsWith("http")

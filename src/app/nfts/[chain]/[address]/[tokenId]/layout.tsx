@@ -22,7 +22,7 @@ type NFTDetailLoader =
     }
   | undefined;
 
-export async function getNFT(
+async function getNFT(
   chain: string | undefined,
   collection: string | undefined,
   tokenId: string | undefined

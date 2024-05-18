@@ -31,7 +31,7 @@ export default function NFTList() {
     if (spam) return filterbychain;
 
     return filterbychain?.filter((item) => item.token.isSpam === false);
-  }, [spam, selectedChain]);
+  }, [spam, selectedChain, nfts]);
 
   return (
     <div className="w-full">

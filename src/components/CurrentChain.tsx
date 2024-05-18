@@ -57,7 +57,7 @@ export default function CurrentChain() {
       >
         {state.icon}
       </div>
-      <small className="text-base font-semibold uppercase">
+      <small className="text-base font-semibold uppercase cursor-default">
         {state.currentChainName}
       </small>
     </div>

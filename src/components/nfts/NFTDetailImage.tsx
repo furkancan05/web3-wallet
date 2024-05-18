@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 // store
 import { useAppStore } from "~/store/store";
@@ -14,7 +15,7 @@ export default function NFTDetailImage() {
     <div className="w-full h-full pr-0 md:pr-10">
       <div className="w-full aspect-square rounded-md overflow-hidden bg-secondary">
         {image ? (
-          <img
+          <Image
             src={image.startsWith("http") ? image : `ipfs://${image}`}
             className="w-full h-full"
             alt=""

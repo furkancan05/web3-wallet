@@ -36,8 +36,11 @@ export default function NFTList() {
   return (
     <div className="w-full">
       {/* filters */}
-      <div className="w-full flex items-center justify-end gap-10 sticky top-20 py-3 bg-background z-50">
-        <SpamFilter />
+      <div className="w-full flex flex-col items-center justify-end gap-10 sticky top-20 py-3 bg-background z-50 sm:flex-row">
+        <div className="w-full flex items-center justify-between">
+          <p className="font-semibold text-lg">NFTs</p>
+          <SpamFilter />
+        </div>
         <ChainFilter />
       </div>
 
@@ -46,7 +49,7 @@ export default function NFTList() {
           There is no NFT yet.
         </p>
       ) : (
-        <div className="w-full grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-4 pt-2">
+        <div className="w-full grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-4 pt-2">
           {filteredNTFs.map((nft, i) => {
             return <NFTCard key={i} nft={nft} />;
           })}

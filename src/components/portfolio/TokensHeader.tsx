@@ -21,8 +21,8 @@ export default function TokensHeader() {
   const setSearch = useAppStore((store) => store.portfolio.setSearch);
 
   return (
-    <div className="flex items-center w-full h-12 my-6 px-10 gap-10">
-      <p className="text-lg font-semibold">Tokens</p>
+    <div className="flex items-center w-full h-12 my-6 gap-10">
+      <p className="text-lg font-semibold">Portfolio</p>
 
       {/* hide zero balances */}
       <Checkbox

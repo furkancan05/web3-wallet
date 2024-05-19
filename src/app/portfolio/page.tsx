@@ -7,6 +7,7 @@ import { useAccount, useChainId } from "wagmi";
 import MainBalances from "~/components/portfolio/MainBalances";
 import TokenList from "~/components/portfolio/TokenList";
 import TokensHeader from "~/components/portfolio/TokensHeader";
+import Container from "~/components/shared/Container";
 
 // store
 import { useAppStore } from "~/store/store";
@@ -46,8 +47,10 @@ export default function PortfolioPage() {
     <div className="w-full h-full">
       <MainBalances />
 
-      <TokensHeader />
-      <TokenList />
+      <Container>
+        <TokensHeader />
+        <TokenList />
+      </Container>
     </div>
   );
 }

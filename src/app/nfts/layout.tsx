@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 
 // compomnents
 import NFTsContainer from "~/components/nfts/NFTsContainer";
+import Container from "~/components/shared/Container";
 
 // config
 import { constants } from "~/config/global.config";
@@ -65,7 +66,9 @@ export default async function NFTsLayout({
 
   return (
     <div className="w-full h-full">
-      <NFTsContainer tokens={tokens?.tokens}>{children}</NFTsContainer>
+      <Container>
+        <NFTsContainer tokens={tokens?.tokens}>{children}</NFTsContainer>
+      </Container>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function TokenList() {
   }, [userTokens]);
 
   return (
-    <div className="w-full text-foreground px-10 pb-10">
+    <div className="w-full text-foreground pb-10">
       {/* header */}
       <div className="w-full flex bg-background text-sm text-secondary font-semibold text-end py-4 px-2 sticky top-20">
         <div className="min-w-[30%] text-start">

@@ -1,6 +1,11 @@
 "use client";
 
+import React from "react";
+
+// store
 import { useAppStore } from "~/store/store";
+
+// types
 import { NFTs } from "~/types/nfts.types";
 
 export default function NFTsContainer({
@@ -12,7 +17,7 @@ export default function NFTsContainer({
 }) {
   const setNfts = useAppStore((store) => store.nfts.setNfts);
 
-  setNfts(tokens);
+  React.useEffect(() => setNfts(tokens), []);
 
-  return <div className="w-full h-full pb-10 px-10">{children}</div>;
+  return <div className="w-full h-full pb-10">{children}</div>;
 }

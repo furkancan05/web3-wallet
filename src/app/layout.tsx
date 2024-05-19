@@ -3,12 +3,10 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 
 // components
-import AppNavigation from "~/components/AppNavigation";
-import AppHeader from "~/components/AppHeader";
+import AppHeader, { AppNavigation } from "~/components/AppHeader";
 
 // config
 import Web3Provider from "~/config/wagmi.config";
-import Head from "next/head";
 
 const inter = Nunito({ subsets: ["latin"] });
 
@@ -29,10 +27,12 @@ export default function RootLayout({
         <Web3Provider>
           <AppHeader />
 
-          <AppNavigation />
-
-          <div className="w-full h-full pl-[200px] pt-20 bg-background text-foreground">
+          <div className="w-full h-full py-20 bg-background text-foreground">
             {children}
+          </div>
+
+          <div className="w-full block fixed bottom-0 bg-background md:hidden">
+            <AppNavigation />
           </div>
         </Web3Provider>
       </body>

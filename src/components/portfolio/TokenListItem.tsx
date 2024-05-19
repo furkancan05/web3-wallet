@@ -2,7 +2,6 @@
 
 import React from "react";
 
-import Link from "next/link";
 import Image from "next/image";
 
 // store
@@ -45,10 +44,7 @@ function TokenListItem({ token }: { token: UserTokens }) {
   const percentageChange = token.usd_price_24hr_usd_change > 0;
 
   return (
-    <Link
-      href=""
-      className="flex w-full bg-card p-4 rounded-md hover:bg-card/90 transition-colors animate-list-item"
-    >
+    <div className="flex w-full bg-card p-4 rounded-md hover:bg-card/90 transition-colors animate-list-item">
       {/* image and name */}
       <div className="min-w-[30%] flex gap-4">
         <Image
@@ -99,7 +95,7 @@ function TokenListItem({ token }: { token: UserTokens }) {
           {hidePrices ? "******" : `$${token.usd_value.toFixed(3)}`}
         </small>
       </div>
-    </Link>
+    </div>
   );
 }
 

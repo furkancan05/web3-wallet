@@ -26,16 +26,16 @@ export default function NFTCard({ nft }: { nft: NFTs | undefined }) {
       href={`/nfts/${getChainName(token?.chainId)}/${token?.contract}/${
         token?.tokenId
       }`}
-      className="w-full h-full max-w-[300px] rounded-md bg-card p-2 hover:-translate-y-2 hover:bg-secondary/30 transition-all"
+      className="w-full h-full rounded-md bg-card p-2 hover:-translate-y-2 hover:bg-secondary/30 transition-all"
     >
       <div className="w-full aspect-square rounded-md overflow-hidden bg-secondary">
         {token?.image ? (
-          <img
+          <Image
             alt=""
             src={
               token.image.startsWith("http")
                 ? token.image
-                : `ipfs://${token.image}`
+                : `https://ipfs.io/ipfs/${token.image}`
             }
             width={500}
             height={500}
@@ -48,16 +48,16 @@ export default function NFTCard({ nft }: { nft: NFTs | undefined }) {
       {/* collection row */}
       <div
         ref={collectionRef}
-        className="flex items-end gap-2 text-sm text-secondart font-semibold my-3"
+        className="flex flex-1 items-end gap-2 text-sm text-secondart font-semibold my-3"
       >
         <div className="w-6 h-6 rounded-full bg-secondary overflow-hidden">
           {token?.collection.imageUrl ? (
-            <img
+            <Image
               alt=""
               src={
                 token.collection.imageUrl.startsWith("http")
                   ? token.collection.imageUrl
-                  : `ipfs://${token.collection.imageUrl}`
+                  : `https://ipfs.io/ipfs/${token.collection.imageUrl}`
               }
               width={500}
               height={500}

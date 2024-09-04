@@ -79,7 +79,7 @@ function TokenListItem({ token }: { token: UserTokens }) {
           })}
         >
           {`${
-            percentageChange ? "+" : "-"
+            percentageChange ? "+" : ""
           }${token.usd_price_24hr_usd_change.toFixed(1)}`}
         </small>
       </div>

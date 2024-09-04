@@ -9,10 +9,17 @@ import { useAppStore } from "~/store/store";
 
 export default function TokenList() {
   const userTokens = useAppStore((store) => store.portfolio.userTokens);
+  const hideZeroBalances = useAppStore(
+    (store) => store.portfolio.hideZeroBalances
+  );
 
   const filteredTokens = React.useMemo(() => {
-    return userTokens;
-  }, [userTokens]);
+    if (!hideZeroBalances) return userTokens;
+
+    return userTokens?.filter((token) => Number(token.balance) !== 0);
+  }, [userTokens, hideZeroBalances]);
+
+  console.log("asdasd,", filteredTokens);
 
   return (
     <div className="w-full text-foreground pb-10">

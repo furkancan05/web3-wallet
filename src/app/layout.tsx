@@ -4,6 +4,7 @@ import "./globals.css";
 
 // components
 import AppHeader, { AppNavigation } from "~/components/AppHeader";
+import PageLoader from "~/components/PageLoader";
 
 // config
 import Web3Provider from "~/config/wagmi.config";
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Web3Provider>
           <AppHeader />
+          <PageLoader />
 
           <div className="w-full h-full py-20 bg-background text-foreground">
             {children}

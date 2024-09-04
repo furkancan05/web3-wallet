@@ -13,6 +13,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitConfig } from "~/config/connectkit.config";
 import { constants } from "~/config/global.config";
 
+// store
+import { useAppStore } from "~/store/store";
+
 export default function Web3Provider({
   children,
 }: {
@@ -20,10 +23,11 @@ export default function Web3Provider({
 }) {
   const queryClient = new QueryClient();
 
+  const setAddress = useAppStore((store) => store.global.setAddress);
+
   const wagmiConfig = createConfig(
     getDefaultConfig({
       // @ts-ignore // kalkacak
-      autoConnect: true,
       chains: [mainnet, avalanche, polygon, bsc],
       transports: {
         [mainnet.id]: http(),
@@ -45,11 +49,12 @@ export default function Web3Provider({
           theme="midnight"
           onConnect={(connection) => {
             setCookie(constants.userAddress, connection.address);
-            window.location.reload();
+            setAddress(connection.address);
           }}
           onDisconnect={() => {
             deleteCookie(constants.userAddress);
-            window.location.reload();
+            setAddress("");
+            // window.location.reload();
           }}
           // customTheme={ConnectKitConfig.customTheme}
         >

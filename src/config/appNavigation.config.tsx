@@ -6,7 +6,7 @@ type AppNavigation = { title: string; path: string; icon: React.ReactNode }[];
 export const AppNavigations: AppNavigation = [
   {
     title: "Portfolio",
-    path: "/portfolio",
+    path: "/",
     icon: <IoWalletOutline size={20} />,
   },
   {

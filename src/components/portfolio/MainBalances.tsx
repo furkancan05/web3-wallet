@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useAccount, useChainId } from "wagmi";
+import { useChainId } from "wagmi";
 
 // store
 import { useAppStore } from "~/store/store";
@@ -11,19 +11,19 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { FiRefreshCcw } from "react-icons/fi";
 import { AiOutlineLoading } from "react-icons/ai";
 import { TbArrowBigDown, TbSend, TbShoppingCart } from "react-icons/tb";
+import Container from "~/components/shared/Container";
 
 // utils
 import { getUserTokens } from "~/utils/fetchers";
 import { getChainName } from "~/utils/getChainName";
-import Container from "../shared/Container";
 
 export default function MainBalances() {
   const hidePrices = useAppStore((store) => store.portfolio.hidePrices);
   const userTokens = useAppStore((store) => store.portfolio.userTokens);
+  const address = useAppStore((store) => store.global.address);
   const setUserTokens = useAppStore((store) => store.portfolio.setUserTokens);
   const togglePrices = useAppStore((store) => store.portfolio.togglePrices);
 
-  const { address } = useAccount();
   const chainId = useChainId();
 
   const [loading, setLoading] = React.useState(false);

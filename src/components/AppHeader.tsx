@@ -1,13 +1,15 @@
 "use client";
 
 import React from "react";
-import { useChainId } from "wagmi";
+import { useAccount, useChainId } from "wagmi";
 import { ConnectKitButton } from "connectkit";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 // components
 import Container from "~/components/shared/Container";
 import Link from "next/link";
+import LOGO from "~/assets/logo.png";
 
 // utils
 import { cn } from "~/utils/cn";
@@ -24,12 +26,12 @@ export default function AppHeader() {
     <header
       className={cn(
         "fixed top-0 w-full h-20 bg-background transition-colors z-40",
-        { "bg-portfolio-green": pathname === "/portfolio" }
+        { "bg-portfolio-green": pathname === "/" }
       )}
     >
       <Container className="flex h-full items-center justify-between">
         <div className="flex-1">
-          <p className=" text-3xl font-bold">LOGO</p>
+          <Image alt="" src={LOGO} width={150} height={100} />
         </div>
 
         <div className="flex-1 hidden md:block">
@@ -75,6 +77,7 @@ export function AppNavigation() {
 
 function CurrentChain() {
   const chainId = useChainId();
+  const { isConnected } = useAccount();
 
   const [state, setState] = React.useState<{
     currentChainName: string | undefined;
@@ -96,7 +99,11 @@ function CurrentChain() {
   };
 
   React.useEffect(() => {
-    if (!chainId) return;
+    if (!chainId || !isConnected)
+      return setState({
+        currentChainName: undefined,
+        icon: null,
+      });
 
     const chainName = getChainName(chainId);
     const icon = ChainIcons[chainName as keyof typeof icons];
@@ -105,7 +112,7 @@ function CurrentChain() {
       currentChainName: chainName,
       icon: icon,
     });
-  }, [chainId]);
+  }, [isConnected, chainId]);
 
   if (!state.currentChainName || !state.icon) return <div></div>;
   return (

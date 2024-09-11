@@ -80,7 +80,7 @@ function TokenListItem({ token }: { token: UserTokens }) {
         >
           {`${
             percentageChange ? "+" : ""
-          }${token.usd_price_24hr_usd_change.toFixed(1)}`}
+          }${token.usd_price_24hr_usd_change.toFixed(1)}%`}
         </small>
       </div>
       <div className="w-full flex flex-col text-end font-semibold">

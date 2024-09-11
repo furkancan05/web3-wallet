@@ -27,6 +27,7 @@ export default function Web3Provider({
 
   const wagmiConfig = createConfig(
     getDefaultConfig({
+      // autoConnect: false,
       // @ts-ignore // kalkacak
       chains: [mainnet, avalanche, polygon, bsc],
       transports: {
@@ -48,13 +49,13 @@ export default function Web3Provider({
           debugMode={ConnectKitConfig.debugMode}
           theme="midnight"
           onConnect={(connection) => {
+            console.log("furkan");
             setCookie(constants.userAddress, connection.address);
             setAddress(connection.address);
           }}
           onDisconnect={() => {
             deleteCookie(constants.userAddress);
             setAddress("");
-            // window.location.reload();
           }}
           // customTheme={ConnectKitConfig.customTheme}
         >

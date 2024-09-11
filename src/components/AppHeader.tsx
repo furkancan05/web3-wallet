@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useAccount, useChainId } from "wagmi";
+import { useAccount, useChainId, useDisconnect } from "wagmi";
 import { ConnectKitButton } from "connectkit";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -18,6 +18,7 @@ import { getChainName } from "~/utils/getChainName";
 // config
 import { ChainIcons } from "~/config/chains";
 import { AppNavigations } from "~/config/appNavigation.config";
+import { useAppStore } from "~/store/store";
 
 export default function AppHeader() {
   const pathname = usePathname();
